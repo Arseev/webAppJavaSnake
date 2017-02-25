@@ -1,6 +1,6 @@
 // Web Application Development
 // Final Project
-// Adam Seevers, Sam Uribe
+// Adam Seevers
 
 //snake variable
 var s;
