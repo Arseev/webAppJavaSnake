@@ -1,6 +1,6 @@
 // Web Application Development
 // Final Project
-// Adam Seevers, Sam Uribe
+// Adam Seevers
 // This file contains the snake object and all attributes associated with it.
 
 function Snake() {
@@ -62,5 +62,5 @@ function Snake() {
 
   }
 
-  //snake dies when it hits a wall or itself.
+  //snake dies when it hits a wall or itself. update when snake is dead
 }
