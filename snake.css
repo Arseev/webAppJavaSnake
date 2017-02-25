@@ -1,0 +1,9 @@
+table, td, tr, th {
+	border: 1px solid black;
+}
+table {
+	border-collapse: collapse;
+	position: absolute;
+	left: 800px;
+	top: 200px;
+}
