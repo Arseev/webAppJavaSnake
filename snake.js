@@ -3,14 +3,18 @@
 // Adam Seevers
 // This file contains the snake object and all attributes associated with it.
 
+
+
 function Snake() {
-  this.x = 0;
-  this.y = 0;
+  this.x = 20;
+  this.y = 20;
   this.xspeed = 1;
   this.yspeed = 0;
   this.total = 1;
   this.tail = [];
-
+    
+  
+  
   // Check to see if the snake has met a block to eat and increase snake length
   this.eat = function(pos) {
     var d = dist(this.x, this.y, pos.x, pos.y);
@@ -18,6 +22,8 @@ function Snake() {
       return false;
     } else {
       this.total++;
+      var sc=document.querySelector("#score");
+      sc.innerHTML="Score: "+this.total;
       return true;
     }
   }
@@ -62,5 +68,15 @@ function Snake() {
 
   }
 
-  //snake dies when it hits a wall or itself. update when snake is dead
+  //snake dies when it hits a wall or itself.
+  this.die = function() {
+	this.total = 1;
+	this.tail = [];	
+	this.xspeed = 0;
+	this.yspeed = 0;
+	this.x = 300;
+	this.y = 300;
+  }
+  
+  
 }

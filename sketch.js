@@ -10,17 +10,23 @@ var endGame;
 var scl = 20;
 //increase in snake length as it gets a block
 var lUp;
+var printEndGame = false;
+var newScore = true;
+
 
 //initialize the game board and the snake object and the block object
 function setup() {
-  createCanvas(600 ,600);
+  canvas = createCanvas(600 ,600);
   keyCode = RIGHT_ARROW;
   s = new Snake();
+  var printEndGame = 0;
   frameRate(10);
   pickLocation();
 }
 
 function newGame() {
+  var printEndGame = 0;
+  document.getElementById('endOptions').innerHTML =" ";
   background(255,0,0);
   keyCode = RIGHT_ARROW;
   s = new Snake();
@@ -35,7 +41,7 @@ function pickLocation() {
 
 // draws the current snake onto the canvas of the html web page.
 function draw() {
-  if (s.tail.length > 5) {
+  if (s.total > 5) {
     background(0);
   } else {
     background(165);
@@ -86,9 +92,56 @@ function keyPressed() {
 
 //Parameters for the snake losing
 function snake_die() {
-  background(255,0,0);
+  while (printEndGame == false) {
+  	background(255,0,0);
+  	var endOptions = document.createElement("div");
+	var endClick = document.createElement("script");
+  	var optionForm = document.createElement("div");
+  	var submitScores = document.createElement("input");
+  	var startNew = document.createElement("input");
+	endClick.innerHTML ="document.getElementById('endNewGame').addEventListener('click',newGame);"
+	endClick.innerHTML += "document.getElementById('submitScores').addEventListener('click',postScores);"
+  	submitScores.type = "button";
+	submitScores.id = "submitScores";
+  	startNew.type = "button";
+  	startNew.id= "endNewGame";
+  	startNew.value = "New Game";
+  	submitScores.value = "Submit Score";
+	endOptions.id = "endOptions";
+  	endOptions.innerHTML = "<div style='text-align: center'>GAME OVER</br>Score: "+s.total+"\n</div>";
+  	optionForm.appendChild(submitScores);
+  	optionForm.appendChild(startNew);
+  	endOptions.appendChild(optionForm);  
+	document.body.appendChild(endOptions);	
+  	document.body.appendChild(optionForm);
+	document.body.appendChild(endClick);
+  	printEndGame = true;
+	}
+  document.getElementById('endOptions').innerHTML = "<div style='text-align: center'>GAME OVER</br>Score: "+s.total+"\n</div>";
+  if (printEndGame == true) {
+	s.die();
+  }
+	
+}
+  
+function clear() {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0,0,600,600);
 }
 
+function postScores(){
+    var form = document.createElement("form");
+	form.setAttribute("method","post");
+	form.setAttribute("action","submitScore.php");
+	var hiddenField = document.createElement("input");
+	hiddenField.setAttribute("type","hidden");
+	hiddenField.setAttribute("name","score");
+	hiddenField.setAttribute("value",s.total);
+	form.appendChild(hiddenField);
+	document.body.appendChild(form);
+	form.submit();
+}
 
 
 

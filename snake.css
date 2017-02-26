@@ -3,7 +3,16 @@ table, td, tr, th {
 }
 table {
 	border-collapse: collapse;
-	position: absolute;
-	left: 800px;
+	
+    position: absolute;
+	left: 100px;
 	top: 200px;
+    
+}
+#score {
+    border: 1px solid black;
+    padding: 10px;
+    position: absolute;
+    left: 300px;
+    top: 200px;
 }
